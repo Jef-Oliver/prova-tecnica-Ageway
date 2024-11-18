@@ -4,7 +4,7 @@ class Pessoa extends TRecord
 {
     const TABLENAME = 'pessoas';   // Nome da tabela no banco de dados
     const PRIMARYKEY = 'id';      // Nome da chave primária
-    const IDPOLICY = 'serial';    // Política de geração de ID (auto incremento)
+    const IDPOLICY = 'serial';    // (auto incremento)
 
     // Atributos adicionais para mapeamento de campos da tabela
     private $tipo;
@@ -17,12 +17,11 @@ class Pessoa extends TRecord
     private $endereco_completo;
     private $data_cadastro;
 
-    
     public function __construct($id = NULL)
     {
         parent::__construct($id);
 
-        // Configura os atributos que serão carregados do banco de dados
+        // Atributos que serão carregados do banco de dados
         $this->addAttribute('tipo');
         $this->addAttribute('nome_completo');
         $this->addAttribute('razao_social');
@@ -32,5 +31,12 @@ class Pessoa extends TRecord
         $this->addAttribute('telefone');
         $this->addAttribute('endereco_completo');
         $this->addAttribute('data_cadastro');
+    }
+    /**
+     * Atributo virtual para exibir Nome ou Razão Social com base no tipo
+     */
+    public function get_nome_razao()
+    {
+        return $this->tipo === 'Físico' ? $this->nome_completo : $this->razao_social;
     }
 }

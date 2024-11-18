@@ -30,7 +30,15 @@ class PessoaEdit extends TPage
         $cnpj = new TEntry('cnpj');
         $email = new TEntry('email');
         $telefone = new TEntry('telefone');
-        $endereco_completo = new TEntry('endereco_completo');
+
+        // Campos de endereço
+        $rua = new TEntry('rua');
+        $numero = new TEntry('numero');
+        $complemento = new TEntry('complemento');
+        $bairro = new TEntry('bairro');
+        $cidade = new TEntry('cidade');
+        $estado = new TEntry('estado');
+        $cep = new TEntry('cep');
 
         // Configurações dos campos
         $id->setEditable(false);
@@ -48,7 +56,15 @@ class PessoaEdit extends TPage
         $this->form->addQuickField('CNPJ', $cnpj, 200);
         $this->form->addQuickField('Email', $email, 300);
         $this->form->addQuickField('Telefone', $telefone, 200);
-        $this->form->addQuickField('Endereço Completo', $endereco_completo, 400);
+
+        // Adiciona os campos de endereço
+        $this->form->addQuickField('Rua', $rua, 300);
+        $this->form->addQuickField('Número', $numero, 100);
+        $this->form->addQuickField('Complemento', $complemento, 300);
+        $this->form->addQuickField('Bairro', $bairro, 200);
+        $this->form->addQuickField('Cidade', $cidade, 200);
+        $this->form->addQuickField('Estado', $estado, 100);
+        $this->form->addQuickField('CEP', $cep, 150);
 
         // Botão de salvar
         $this->form->addQuickAction('Salvar Alterações', new TAction([$this, 'onSave']), 'fa:save');
@@ -111,6 +127,12 @@ class PessoaEdit extends TPage
 
             // Salva os dados no banco
             $dados = $this->form->getData();
+
+            // Remove a formatação de CPF, CNPJ e CEP antes de salvar
+            $dados->cpf = isset($dados->cpf) ? preg_replace('/\D/', '', $dados->cpf) : null;
+            $dados->cnpj = isset($dados->cnpj) ? preg_replace('/\D/', '', $dados->cnpj) : null;
+            $dados->cep = isset($dados->cep) ? preg_replace('/\D/', '', $dados->cep) : null;
+
             $pessoa = new Pessoa;
             $pessoa->fromArray((array) $dados);
             $pessoa->store();

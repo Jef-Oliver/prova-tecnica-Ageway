@@ -7,81 +7,98 @@ class PessoaDelete extends TPage
     {
         parent::__construct();
 
-        // Criação do datagrid
+        // Criando o datagrid que exibe os registros a serem excluídos
         $this->datagrid = new TDataGrid();
 
-        // Adiciona colunas
+        // Coluna ID: para identificar unicamente cada pessoa
         $col_id = new TDataGridColumn('id', 'ID', 'center', '10%');
-        $col_nome = new TDataGridColumn('nome_completo', 'Nome', 'left', '50%');
+        
+        // Coluna Nome/Razão Social: exibe o nome completo ou a razão social
+        $col_nome = new TDataGridColumn('nome_completo', 'Nome/Razão Social', 'left', '50%');
+        
+        // Transformer para exibir Nome Completo ou Razão Social com base no tipo
+        $col_nome->setTransformer(function ($value, $object) {
+            return $object->tipo === 'Físico' ? $object->nome_completo : $object->razao_social;
+        });
+
+        // Coluna Tipo: indica se a pessoa é Física ou Jurídica
         $col_tipo = new TDataGridColumn('tipo', 'Tipo', 'center', '20%');
 
+        // Adiciona as colunas ao datagrid
         $this->datagrid->addColumn($col_id);
         $this->datagrid->addColumn($col_nome);
         $this->datagrid->addColumn($col_tipo);
 
-        // Criação do botão excluir na coluna
+        // Criação de uma ação para exclusão
         $actionDelete = new TDataGridAction([$this, 'onDelete']);
-        $actionDelete->setField('id');
+        $actionDelete->setField('id'); // Define o campo usado para identificar o registro
         $this->datagrid->addAction($actionDelete, 'Excluir', 'fa:trash red');
 
-        // Adiciona ao datagrid
+        // Configura o modelo do datagrid
         $this->datagrid->createModel();
 
-        // Popula o datagrid
+        // Recarrega os dados no datagrid ao iniciar
         $this->onReload();
 
-        // Adiciona à página
-        $panel = new TPanelGroup('Excluir Pessoas');
+        // Adiciona o datagrid a um painel
+        $panel = new TPanelGroup('Excluir Pessoas'); // Título do painel
         $panel->add($this->datagrid);
 
+        // Adiciona o painel à página
         parent::add($panel);
     }
 
     /**
-     * Recarrega os dados do datagrid
+     * Recarrega os dados do datagrid com os registros do banco
      */
     public function onReload()
     {
         try {
+            // Abre uma transação no banco
             TTransaction::open('cadastrar_pessoas');
 
+            // Recupera os registros da tabela de pessoas
             $repository = new TRepository('Pessoa');
             $pessoas = $repository->load();
 
             if ($pessoas) {
-                $this->datagrid->clear();
+                $this->datagrid->clear(); // Limpa o datagrid antes de adicionar novos itens
                 foreach ($pessoas as $pessoa) {
-                    $this->datagrid->addItem($pessoa);
+                    $this->datagrid->addItem($pessoa); // Adiciona cada pessoa ao datagrid
                 }
             }
 
-            TTransaction::close();
+            TTransaction::close(); // Fecha a transação
         } catch (Exception $e) {
+            // Exibe uma mensagem de erro caso algo dê errado
             new TMessage('error', $e->getMessage());
-            TTransaction::rollback();
+            TTransaction::rollback(); // Reverte as alterações em caso de falha
         }
     }
 
     /**
-     * Exclui uma pessoa pelo ID
+     * Exclui uma pessoa com base no ID fornecido
      */
     public function onDelete($param)
     {
         try {
+            // Abre uma transação no banco
             TTransaction::open('cadastrar_pessoas');
 
-            if (isset($param['id'])) {
-                $pessoa = new Pessoa($param['id']);
-                $pessoa->delete();
+            if (isset($param['id'])) { // Verifica se o ID foi fornecido
+                $pessoa = new Pessoa($param['id']); // Carrega o registro com o ID fornecido
+                $pessoa->delete(); // Deleta o registro
 
+                // Exibe uma mensagem de sucesso
                 new TMessage('info', 'Pessoa excluída com sucesso!');
-                $this->onReload();
+                $this->onReload(); // Atualiza o datagrid
             }
 
-            TTransaction::close();
+            TTransaction::close(); // Fecha a transação
         } catch (Exception $e) {
+            // Exibe uma mensagem de erro caso algo dê errado
             new TMessage('error', $e->getMessage());
-            TTransaction::rollback();
+            TTransaction::rollback(); // Reverte as alterações em caso de falha
         }
     }
 }
