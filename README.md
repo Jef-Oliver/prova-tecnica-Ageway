@@ -17,14 +17,18 @@ Criado por Jeferson de Oliveira Santos.
 
 Projeto de cadastro de pessoas físicas e jurídicas utilizando o Adianti Framework.
 
-## Pré-requisitos
+## Pré-requisitos 
 
 Antes de começar, certifique-se de ter as seguintes ferramentas instaladas no seu ambiente:
-- [PHP 7.4](https://www.php.net/)
+- [PHP 7.4](https://windows.php.net/downloads/releases/)  opção : 11/2/2022  9:47 PM     26237519 php-7.4.33-Win32-vc15-x64.zip
 - [Composer](https://getcomposer.org/)
 - [MySQL 5.7+](https://www.mysql.com/)
 - [Git](https://git-scm.com/)
 - [Adianti Framework](https://adiantiframework.com.br/downloads)
+
+Após baixar o php7.4 coloqueo na unidade C
+
+Acesse as variáveis de ambiente e configure o caminho do seu php exemplo: c:/php74
 
 ## Passo a Passo para Configuração do Projeto
 
@@ -33,15 +37,15 @@ Execute o comando abaixo para clonar o projeto:
 ```bash
 git clone https://github.com/Jef-Oliver/prova-tecnica-Ageway.git
 ```
-### 2. Acesse a Pasta do Projeto
+### 2. Acesse a Pasta do Projeto pelo vscode
 
 - cd sua-pasta
 
-### 3. Instale as Dependências do Composer
+### 3. Instale as Dependências do Composer e quando baixar o Adianti
 
 - composer install
 
-### 4.  Configure o Arquivo app/config/application.ini
+### 4.  Configure o arquivo app extraido do template do Adianti, dentro tem o caminho app/config/application.ini se não funcionar, crie dentro da mesma pasta config_db.ini, e coloque o código abaixo dentro, com os dados do seu banco.
 
 ```bash
 [database]
