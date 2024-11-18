@@ -1,78 +1,82 @@
-## Autor
-Criado por Jeferson de Oliveira Santos.
+# Prova Técnica - Ageway
 
-## Configuração de ambiente
-- Ambiente configurado
-- base de dados criada
-- tabela cadastrar_pessoas criada
+Projeto desenvolvido para gerenciamento de pessoas com cadastro, edição, listagem e exclusão.
 
-## Ferramentas
+## 🚀 Tecnologias Utilizadas
+- **PHP** (7.4 ou superior)
+- **MySQL** ou **MariaDB**
+- **Adianti Framework**
+- **Composer**
 
-- VSCODE
-- MySQL Workbench
+---
 
-## Crud
+## ⚙️ Pré-requisitos
 
-# Cadastro de Pessoas
+Antes de começar, certifique-se de ter instalado:
+- **PHP** (7.4 ou superior).
+- **Composer** (gerenciador de dependências do PHP).
+- **MySQL** (banco de dados).
+- **Servidor web** (opcional, caso utilize o PHP embutido, não será necessário).
 
-Projeto de cadastro de pessoas físicas e jurídicas utilizando o Adianti Framework.
+---
 
-## Pré-requisitos 
+## 🛠️ Passo a Passo para Rodar o Projeto
 
-Antes de começar, certifique-se de ter as seguintes ferramentas instaladas no seu ambiente:
-- [PHP 7.4](https://windows.php.net/downloads/releases/)  opção : 11/2/2022  9:47 PM     26237519 php-7.4.33-Win32-vc15-x64.zip
-- [Composer](https://getcomposer.org/)
-- [MySQL 5.7+](https://www.mysql.com/)
-- [Git](https://git-scm.com/)
-- [Adianti Framework](https://adiantiframework.com.br/downloads)
-
-Após baixar o php7.4 coloqueo na unidade C
-
-Acesse as variáveis de ambiente e configure o caminho do seu php exemplo: c:/php74
-
-## Passo a Passo para Configuração do Projeto
-
-### 1. Clone o Repositório
-Execute o comando abaixo para clonar o projeto:
+### 1. Baixar o Projeto
+Clone o repositório do GitHub:
 ```bash
 git clone https://github.com/Jef-Oliver/prova-tecnica-Ageway.git
+
+cd prova-tecnica-Ageway
 ```
-### 2. Acesse a Pasta do Projeto pelo vscode
+## 🛠️ Configurar o Banco de Dados
+Crie um banco de dados no MySQL com o nome cadastrar_pessoas (ou o nome configurado no arquivo application.ini):
 
-- cd sua-pasta
+```sql
+CREATE DATABASE cadastrar_pessoas;
+```
+## Crie a tabela necessária
+Dentro do banco de dados cadastrar_pessoas, crie a tabela pessoas com a seguinte estrutura:
 
-### 3. Instale as Dependências do Composer e quando baixar o Adianti
+USE cadastrar_pessoas;
 
-- composer install
+CREATE TABLE pessoas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tipo ENUM('Físico', 'Jurídico') NOT NULL,
+    nome_completo VARCHAR(255),
+    razao_social VARCHAR(255),
+    cpf VARCHAR(14) UNIQUE,
+    cnpj VARCHAR(18) UNIQUE,
+    email VARCHAR(255),
+    telefone VARCHAR(15),
+    endereco_completo VARCHAR(500),
+    data_cadastro DATETIME
+);
 
-### 4.  Configure o arquivo app extraido do template do Adianti, dentro tem o caminho app/config/application.ini se não funcionar, crie dentro da mesma pasta config_db.ini, e coloque o código abaixo dentro, com os dados do seu banco.
+## Configurar o Arquivo application.ini
+No diretório app/config, edite o arquivo application.ini e atualize as informações do banco de dados:
+OBS: se ainda não funcionar use o arquivo cadastrar_pessoas.ini dentro de app/config
 
-```bash
+```sql
 [database]
-type = mysql
-host = localhost
-name = cadastrar_pessoas
-user = root
-pass = sua-senha
+type     = mysql
+host     = localhost
+name     = cadastrar_pessoas
+user     = seu_usuario
+pass     = sua_senha
 ```
 
-### 6. Inicialize o Servidor PHP
+## Instalar Dependências
+```bash
+composer install
+```
+
+## Iniciar o Servidor
 ```bash
 php -S localhost:8000
 ```
 
-### 7. Acesse a Aplicação
-```bash
-http://localhost:8000
-```
-
-## Funcionalidades
-1. Cadastro de Pessoas Físicas e Jurídicas.
-2. Edição de Pessoas.
-3. Exclusão de Registros.
-4. Listagem com Filtros.
-
-5. ## Imagens
+## Imagens
 
 ![image](https://github.com/user-attachments/assets/84cfc4b9-1162-4f59-b2dd-2f14a4150f97)
 ![image](https://github.com/user-attachments/assets/c9b0366c-d2d4-4e82-a7f3-8dec0a6b96e8)
@@ -81,9 +85,3 @@ http://localhost:8000
 ![image](https://github.com/user-attachments/assets/c194e14e-1437-4565-a5d5-cc6842b46cdc)
 ![image](https://github.com/user-attachments/assets/89657244-a42a-45e9-89be-8524c85dd618)
 ![image](https://github.com/user-attachments/assets/f6405146-2285-44ed-bb7f-f99b0857bb02)
-
-
-
-
-
-
