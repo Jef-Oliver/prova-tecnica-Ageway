@@ -1,0 +1,66 @@
+1- criando cadastrar pessoas
+
+
+
+2 - criando tabela pessoa 
+
+
+
+
+CREATE TABLE pessoa (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tipo ENUM('Físico', 'Jurídico') NOT NULL,
+    nome_completo VARCHAR(100), 
+    razao_social VARCHAR(100), 
+    cpf VARCHAR(11) UNIQUE, 
+    cnpj VARCHAR(14) UNIQUE, 
+    email VARCHAR(100),
+    telefone VARCHAR(20),
+    endereco_completo VARCHAR(255),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+3 - baixar o composer para gerenciar as dependências do php
+
+4 - No vscode acessar pasta C:\Users\70979170168\Documents\Projeto-php>
+
+5 - criar o projeto composer com adianti
+composer create-project adianti/application-template cadastro_pessoa
+
+obtive erro de estabilidade
+
+6 - tentei outra abordagem, iniciando o composer (composer init)
+
+7 - Após a configuração, alterei o arquivo para receber a config 
+
+{
+    "name": "70979170168/projeto-php",
+    "description": "Cadastro de Pessoas",
+    "authors": [
+      {
+        "name": "Jeferson Oliveira"
+      }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+  }
+
+
+8 - composer install, os arquivos foram criados dentro da pasta do projeto
+
+9 - verifiquei a conexão: php -S localhost:8000
+
+10 - Ambiente configurado para começar o desenvolvimento
+
+11 - criei um arquivo de teste para o caminho app/control da pasta template.
+afins de teste com o banco
+
+12 - tive umas complicações pois coloquei a pasta template como uma subpasta do meu projeto e nada funcionada, até eu descobrir que todo o conteúdo da pasta template deve estar na pasta raiz do projeto
+
+13 - ao tentar criar conta no console do Adianti tive erro, e precisei habilitar uma configuração no arquivo php.ini (extension=pdo_mysql)
+
+14 - mesmo assim continuei com o erro, precisei ignorar a tela de login do template.
+
+15 - aí sim consegui partir para o desenvolvimento.
