@@ -1,11 +1,6 @@
 1- criando cadastrar pessoas
 
-
-
 2 - criando tabela pessoa 
-
-
-
 
 CREATE TABLE pessoa (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,8 +14,6 @@ CREATE TABLE pessoa (
     endereco_completo VARCHAR(255),
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-
 
 3 - baixar o composer para gerenciar as dependências do php
 
@@ -64,3 +57,7 @@ afins de teste com o banco
 14 - mesmo assim continuei com o erro, precisei ignorar a tela de login do template.
 
 15 - aí sim consegui partir para o desenvolvimento.
+
+
+na quinta feira eu comecei a configurar meu ambiente de desenvolvimento.
+Tive alguns contratempos com o erro 'could not find driver', ao criar uma conta para entrar no template do Adianti, decidi desabilitar o login e a permissão para acessar o template para não perder tempo, tudo isso no sábado, quando meu computador foi desligado devido a uma batida no poste desligou os computadores da SECAD, onde eu acessava remotamente de outro notebook. não tive como ligar mas continuei hoje as 14h dia 18/11/2024, e finalizei as 18h, com todas os requisitos solicitados.
