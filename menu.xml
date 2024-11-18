@@ -136,7 +136,33 @@
               </menuitem>
         </menu>
     </menuitem>
+<<<<<<< HEAD
         
+=======
+
+<menuitem label="Pessoas">
+    <icon>fas:users fa-fw</icon>
+    <menu>
+        <menuitem label="Cadastrar Pessoa">
+            <icon>fas:user-plus fa-fw</icon>
+            <action>PessoaForm</action>
+        </menuitem>
+        <menuitem label="Listar Pessoas">
+            <icon>fas:list fa-fw</icon>
+            <action>PessoaList</action>
+        </menuitem>
+        <menuitem label="Alterar Cadastro">
+            <icon>fas:user-edit fa-fw</icon>
+            <action>PessoaEdit</action>
+        </menuitem>
+        <menuitem label="Excluir Cadastro">
+            <icon>fas:user-minus fa-fw</icon>
+            <action>PessoaDelete</action>
+        </menuitem>
+    </menu>
+</menuitem>
+
+>>>>>>> d7a83cc (CRUD completo finalizado, com regras de negócio e ajustes finais a serem implementados)
     <menuitem label='Common pages'>
         <menu>
             <menuitem label='Common page 1'>
