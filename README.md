@@ -42,6 +42,7 @@ CREATE DATABASE cadastrar_pessoas;
 ## Crie a tabela necessária
 Dentro do banco de dados cadastrar_pessoas, crie a tabela pessoas com a seguinte estrutura:
 
+```sql
 USE cadastrar_pessoas;
 
 CREATE TABLE pessoas (
@@ -56,6 +57,7 @@ CREATE TABLE pessoas (
     endereco_completo VARCHAR(500),
     data_cadastro DATETIME
 );
+```
 
 ## Configurar o Arquivo application.ini
 No diretório app/config, edite o arquivo application.ini e atualize as informações do banco de dados:
