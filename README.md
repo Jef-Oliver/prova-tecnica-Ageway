@@ -2,6 +2,10 @@
 
 Projeto desenvolvido para gerenciamento de pessoas com cadastro, edição, listagem e exclusão.
 
+## Autor
+
+Jeferson Oliveira
+
 ## 🚀 Tecnologias Utilizadas
 - **PHP** (7.4 ou superior)
 - **MySQL** ou **MariaDB**
